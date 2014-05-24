@@ -1,25 +1,21 @@
 package server;
 
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-
-import java.awt.Dimension;
-
-import javax.swing.border.BevelBorder;
-import javax.swing.InputMap;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.KeyStroke;
-
-import net.miginfocom.swing.MigLayout;
-
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+import javax.swing.border.BevelBorder;
+
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public abstract class ServerCore extends JFrame {
@@ -30,7 +26,7 @@ public abstract class ServerCore extends JFrame {
 	Dimension windDim;
 	JScrollBar vert;
 	JTextArea taOut;
-	JTextArea taIn; 
+	JTextField taIn; //fixed this input enter error needed textfield not textArea
 	JScrollPane scroll;
 	JButton btnSend;
 	String gameState = "init";
@@ -88,15 +84,15 @@ public abstract class ServerCore extends JFrame {
 		scroll.setViewportView(taOut);
 		window.getContentPane().add(scroll, "cell 0 0 2 1,grow");
 		
-		taIn = new JTextArea();
+		taIn = new JTextField();
 		taIn.setBackground(SystemColor.inactiveCaptionBorder);
 		taIn.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		
 		window.getContentPane().add(taIn, "cell 0 1, grow,aligny bottom");
 		
 		btnSend = new JButton("Send");
 		window.getRootPane().setDefaultButton(btnSend);
-		window.getRootPane().getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "none");
-		window.getRootPane().getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("released ENTER"), "press");
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				btnSndList();
@@ -152,7 +148,7 @@ public abstract class ServerCore extends JFrame {
 	}
 	
 	private void btnSndList() {
-		String txtIn = taIn.getText();
+		String txtIn = "Admin: " + taIn.getText();
 		taOut.append(txtIn + "\n");
 		taOut.setCaretPosition(taOut.getDocument().getLength());
 		taIn.setText("");
