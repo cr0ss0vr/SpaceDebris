@@ -12,45 +12,30 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 import javax.swing.border.BevelBorder;
+
+import common.CommandListener;
 
 import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public abstract class ServerCore extends JFrame {
-	public ServerCore() {
-	}
+	
+	public JTextArea taOut;
+	public JTextField taIn; //fixed this input enter error needed textfield not textArea
 
 	JFrame window;
 	Dimension windDim;
 	JScrollBar vert;
-	JTextArea taOut;
-	JTextField taIn; //fixed this input enter error needed textfield not textArea
 	JScrollPane scroll;
 	JButton btnSend;
-	String gameState = "init";
+	String serverState = "init";
+	CommandListener cmdList;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ServerCore frame = new ServerCore();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-	
 	public void run() {
 		try {
 			init();
-			gameState = "server";
+			serverState = "setup";
 			mainLoop();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,38 +44,42 @@ public abstract class ServerCore extends JFrame {
 		}
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public void init() {
+		double scale = 1;
+		//JFrame setup
 		window = new JFrame();
 		
 		window.getContentPane().setBackground(Color.WHITE);
-		windDim = new Dimension(667,332);
+		windDim = new Dimension((int)(667/scale),(int)(332/scale));
 		window.setMinimumSize(windDim);
 		window.getContentPane().setLayout(new MigLayout("", "[grow][]", "[grow][]"));
 		
+		//Text output setup
 		taOut = new JTextArea();
 		taOut.setRequestFocusEnabled(false);
 		taOut.setFocusTraversalKeysEnabled(false);
+		taOut.setLineWrap(true);
 		taOut.setEditable(false);
 		window.getContentPane().add(taOut, "cell 0 0 2 1,grow");
 		
+		//scroll bar setup
 		scroll = new JScrollPane(taOut);
 		scroll.setFocusTraversalKeysEnabled(false);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setSize(new Dimension(50,50));
 		vert = scroll.getVerticalScrollBar();
 		scroll.setViewportView(taOut);
 		window.getContentPane().add(scroll, "cell 0 0 2 1,grow");
 		
+		//text input setup
 		taIn = new JTextField();
 		taIn.setBackground(SystemColor.inactiveCaptionBorder);
+		taOut.setRequestFocusEnabled(true);
 		taIn.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		
-		
 		window.getContentPane().add(taIn, "cell 0 1, grow,aligny bottom");
 		
+		//send button setup
 		btnSend = new JButton("Send");
 		window.getRootPane().setDefaultButton(btnSend);
 		btnSend.addActionListener(new ActionListener() {
@@ -99,23 +88,28 @@ public abstract class ServerCore extends JFrame {
 			}
 		});
 		window.getContentPane().add(btnSend, "cell 1 1");
-		double scale = 1;
-				
+		
+		//window positioning
 		int windowX = getGraphicsConfiguration().getDevice().getDisplayMode().getWidth();// get the monitor's width
 		int windowY = getGraphicsConfiguration().getDevice().getDisplayMode().getHeight(); // get the monitor's height
 		windowX = (int) (windowX * 0.5) - (int) (windDim.width * 0.5); // divide the screen and background image width by 2
 		windowY = (int) (windowY * 0.5) - (int) (windDim.height * 0.5); // divide the screen and background image height by 2
-		
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setBounds(windowX, windowY, windDim.width, windDim.height);
 		
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//show window
 		window.setVisible(true);
+		
+		//variable initialization
+		cmdList = new CommandListener();
+		taOut.append("Commands Enabled. \n"
+				+ "CommandListener listening.\n");
 	}
 
-	
-	
-	public void mainLoop(){		
-		while(!gameState.equalsIgnoreCase("quitting")){
+	public void mainLoop(){
+		serverState = "running";
+		while(!serverState.equalsIgnoreCase("quitting")){
 			
 			//any other code			
 			MoreCalls();
@@ -148,8 +142,14 @@ public abstract class ServerCore extends JFrame {
 	}
 	
 	private void btnSndList() {
-		String txtIn = "Admin: " + taIn.getText();
-		taOut.append(txtIn + "\n");
+		String txtIn = /* we dont want to prefix anything on this string, or the commands wont work... "Admin: " + */ taIn.getText();
+		Parse(txtIn);
+	}
+	
+	public void Parse(String stp){
+		//new command listener implementation
+		taOut.append(stp+"\n");
+		taOut.append(cmdList.handleCommand(stp)+"\n");// handleCommand returns command's string
 		taOut.setCaretPosition(taOut.getDocument().getLength());
 		taIn.setText("");
 	}
