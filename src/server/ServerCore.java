@@ -53,6 +53,7 @@ public abstract class ServerCore extends JFrame {
 		windDim = new Dimension((int)(667/scale),(int)(332/scale));
 		window.setMinimumSize(windDim);
 		window.getContentPane().setLayout(new MigLayout("", "[grow][]", "[grow][]"));
+		window.setTitle("Space Debris Server"); // Add a window Title Caption
 		
 		//Text output setup
 		taOut = new JTextArea();
