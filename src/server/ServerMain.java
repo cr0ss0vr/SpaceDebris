@@ -11,10 +11,14 @@ public class ServerMain extends ServerCore{
 
 	@Override
 	public void MoreCalls() {
-		for (;i < 25; i++) {
-			taOut.setCaretPosition(taOut.getDocument().getLength());
-			taOut.append("Test " + (i + 1) + "\n");
-			vert.setValue(vert.getMaximum());
-		}
+//		for (;i < 25; i++) {
+//			if(i>=1){
+//				taOut.append("\n" + "Test " + (i + 1));
+//			}else{
+//				taOut.append("Test " + (i + 1));
+//			}
+//			vert.setValue(vert.getMaximum());
+//			taOut.setCaretPosition(taOut.getDocument().getLength());
+//		}
 	}
 }
