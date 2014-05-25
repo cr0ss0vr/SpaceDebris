@@ -2,7 +2,6 @@ package client;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.*;
 import java.util.*;
 
 import javax.sound.sampled.Clip;
