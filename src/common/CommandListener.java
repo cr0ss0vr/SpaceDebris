@@ -21,15 +21,19 @@ public class CommandListener {
 				return "Commands Disabled.";
 			}
 		}else{
-			switch(stp.toLowerCase()){
-				default: 
-					return "No such command.";
-				case "help":
+			//cannot be a switch case, it wont recognise .startsWith, which means commands couldnt take arguments.
+			if(stp.toLowerCase().startsWith("help") || stp.toLowerCase().startsWith("?")){
 					return "Command list:\n"
-							+ "tEnable - Toggles command recognition.";
-				case "tenable":
-					enabled=false;
-					return "Commands Disabled.";
+							+ "tEnable - Toggles command recognition."
+							+ "say - Says something from the server.";
+			}else if(stp.toLowerCase().startsWith("say ")){
+				String s2 = stp.substring(stp.indexOf(" ")).trim();
+				return "Server: "+ s2;
+			}else if(stp.toLowerCase().startsWith("tenable")){
+				enabled=false;
+				return "Commands Disabled.";
+			}else{
+				return "No such command.";
 			}
 		}
 	}
