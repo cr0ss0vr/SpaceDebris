@@ -31,9 +31,6 @@ public class CommandListener {
 					enabled=false;
 					return "Commands Disabled.";
 			}
-//			if(stp.toLowerCase().startsWith("help")){
-//				return "There is no help. This is the only command.";
-//			}
 		}
 	}
 }
