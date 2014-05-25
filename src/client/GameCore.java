@@ -23,9 +23,7 @@ public abstract class GameCore {
 	protected Graphics gr;
 	public Rectangle2D rect;
 	static JLabel label;
-	
-	protected Image GI_Background;
-	
+		
 	protected String gameState = "init";
 	
 	static boolean customFont = false;
@@ -69,7 +67,7 @@ public abstract class GameCore {
 		windowY = (int) (windowY * 0.5) - (int) (windHeight * 0.5); // divide the screen and background image height by 2
 		window.setLocation(windowX, windowY); // Set position of the window in the middle of the screen.
 
-		window.setTitle("Block Breaker"); // Add a window Title Caption
+		window.setTitle("Space Debris"); // Add a window Title Caption
 		window.setSize(windWidth, windHeight); // Give the window a size
 		window.setResizable(false);
 
@@ -124,10 +122,6 @@ public abstract class GameCore {
 				newGame();
 			}else if(gameState.equalsIgnoreCase("paused")){
 				drawPaused();
-			}else if(gameState.equalsIgnoreCase("gameover")){
-				drawEndgame();
-			}else if(gameState.equalsIgnoreCase("scoreScreen") || gameState.equalsIgnoreCase("pscorescreen")){
-				drawScoreScreen();
 			}
 			
 			MoreCalls();
@@ -195,8 +189,6 @@ public abstract class GameCore {
 		GameSound.setVolume(clip, 8);
 		GameSound.playSound(clip);
 	}
-	
-	public abstract void blockCollision(int index);
 
 	public abstract void controls();
 	
@@ -215,10 +207,6 @@ public abstract class GameCore {
 	public abstract void drawGame();
 	
 	public abstract void drawPaused();
-	
-	public abstract void drawScoreScreen();
-	
-	public abstract void drawEndgame();
 	
 	public void drawRect(Rectangle2D shape){
 		gr.drawRect((int)shape.getX(), (int)shape.getY(), (int)shape.getWidth(), (int)shape.getHeight());
