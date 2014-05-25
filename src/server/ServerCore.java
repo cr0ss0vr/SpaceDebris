@@ -142,7 +142,12 @@ public abstract class ServerCore extends JFrame {
 	}
 	
 	private void btnSndList() {
-		String txtIn = /* we dont want to prefix anything on this string, or the commands wont work... "Admin: " + */ taIn.getText();
+		/* 
+		 * we dont want to prefix anything on this string, or the commands wont work...
+		 * we'll leave that for the "say" command 
+		 * "Admin: " + 
+		 */ 
+		String txtIn = taIn.getText();
 		Parse(txtIn);
 	}
 	
