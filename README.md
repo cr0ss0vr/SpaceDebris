@@ -11,6 +11,7 @@ Server To-Do list:
 >-show connected clients in UI  
 
 Server Updates:  
+>-Implemented BACKWARDS "quit" command - added (beanfarmer 25/05/2014)
 >-Implemented "help" command - added (cr0ss0vr 25/05/2014)  
 >-Implemented "say" command - added (cr0ss0vr 25/05/2014)  
 >-Implemented "tEnable" command - added (cr0ss0vr 25/05/2014)  
