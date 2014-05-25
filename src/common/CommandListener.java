@@ -32,7 +32,11 @@ public class CommandListener {
 			}else if(stp.toLowerCase().startsWith("tenable")){
 				enabled=false;
 				return "Commands Disabled.";
-			}else{
+			}else if(stp.toLowerCase().startsWith("quit") || stp.toLowerCase().startsWith("exit")){
+				System.exit(0);
+				return "Quitting!";
+			}
+			else{
 				return "No such command.";
 			}
 		}
