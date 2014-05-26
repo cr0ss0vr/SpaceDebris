@@ -15,7 +15,6 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
 import common.CommandListener;
-
 import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
@@ -23,6 +22,7 @@ public abstract class ServerCore extends JFrame {
 	
 	public JTextArea taOut;
 	public JTextField taIn; //fixed this input enter error needed textfield not textArea
+	public boolean taOutChange = false;
 
 	JFrame window;
 	Dimension windDim;
@@ -40,8 +40,13 @@ public abstract class ServerCore extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
+			save();
 			System.exit(-1);
 		}
+	}
+
+	private void save() {
+		
 	}
 
 	public void init() {
@@ -104,7 +109,7 @@ public abstract class ServerCore extends JFrame {
 		
 		//variable initialization
 		cmdList = new CommandListener();
-		taOut.append("Commands Enabled. \n"
+		taOutUpdate("Commands Enabled. \n"
 				+ "CommandListener listening.\n");
 	}
 
@@ -149,15 +154,21 @@ public abstract class ServerCore extends JFrame {
 		 * "Admin: " + 
 		 */ 
 		String txtIn = taIn.getText();
-		Parse(txtIn);
+		taOutUpdate(txtIn);
+	}
+
+	public abstract void taOutUpdate(String txtIn);
+	
+	public void writeLog(){
+		
 	}
 	
-	public void Parse(String stp){
-		//new command listener implementation
-		taOut.append(stp+"\n");
-		taOut.append(cmdList.handleCommand(stp)+"\n");// handleCommand returns command's string
-		taOut.setCaretPosition(taOut.getDocument().getLength());
-		taIn.setText("");
+	public void setServerState(String state){
+		serverState = state;
+	}
+	
+	public String getServerState(){
+		return serverState;
 	}
 	
 	public abstract void MoreCalls();
