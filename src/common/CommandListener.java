@@ -1,7 +1,5 @@
 package common;
 
-import server.ServerCore;
-
 public class CommandListener {
 	boolean enabled = true;
 	
@@ -34,13 +32,7 @@ public class CommandListener {
 			}else if(stp.toLowerCase().startsWith("tenable")){
 				enabled=false;
 				return "Commands Disabled.";
-			}else if(stp.toLowerCase().startsWith("quit") || stp.toLowerCase().startsWith("exit")){
-				setServerState("quitting");
-				return "Quitting!";
-			}else if(stp.toLowerCase().startsWith("clear") || stp.toLowerCase().startsWith("cls")){
-				return "Screen Cleared.";
-			}
-			else{
+			}else{
 				return "No such command.";
 			}
 		}

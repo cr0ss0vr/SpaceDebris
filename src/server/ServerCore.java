@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +21,8 @@ import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public abstract class ServerCore extends JFrame {
-	
+
+	public static Logger logger = Logger.getLogger("SpaceDebris");
 	public JTextArea taOut;
 	public JTextField taIn; //fixed this input enter error needed textfield not textArea
 	public boolean taOutChange = false;
@@ -34,13 +37,16 @@ public abstract class ServerCore extends JFrame {
 
 	public void run() {
 		try {
+            logger.log(Level.INFO, "Initialising");
 			init();
 			serverState = "setup";
 			mainLoop();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
+            logger.log(Level.INFO, "Saving.");
 			save();
+            logger.log(Level.INFO, "Quitting.");
 			System.exit(-1);
 		}
 	}
@@ -121,7 +127,7 @@ public abstract class ServerCore extends JFrame {
 			MoreCalls();
 
 			//draw and finish
-			window.repaint();
+//			window.repaint();
 			
 			try{
 				Thread.sleep(24);
@@ -156,19 +162,25 @@ public abstract class ServerCore extends JFrame {
 		String txtIn = taIn.getText();
 		taOutUpdate(txtIn);
 	}
-
-	public abstract void taOutUpdate(String txtIn);
+	
+	public void taOutUpdate(String stp){
+		//new command listener implementation
+		taOut.append(stp+"\n");
+		if(stp.toLowerCase().startsWith("quit") || stp.toLowerCase().startsWith("exit")){
+			serverState="quitting";
+			taOut.append("Quitting!");
+		}else if(stp.toLowerCase().startsWith("clear") || stp.toLowerCase().startsWith("cls")){
+			taOut.setText("");
+			taOut.append("Screen Cleared.");
+		}else{
+			taOut.append(cmdList.handleCommand(stp)+"\n");// handleCommand returns command's string
+		}
+		taOut.setCaretPosition(taOut.getDocument().getLength());
+		taIn.setText("");
+	}
 	
 	public void writeLog(){
 		
-	}
-	
-	public void setServerState(String state){
-		serverState = state;
-	}
-	
-	public String getServerState(){
-		return serverState;
 	}
 	
 	public abstract void MoreCalls();

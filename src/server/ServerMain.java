@@ -1,10 +1,10 @@
 package server;
 
-import server.ServerCore;
-import common.CommandListener;
+import java.util.logging.Logger;
 
 @SuppressWarnings("serial")
 public class ServerMain extends ServerCore{
+	
 	
 	int i = 0;
 	
@@ -12,16 +12,17 @@ public class ServerMain extends ServerCore{
 		new ServerMain().run();
 	}
 
-	public void MoreCalls() {
-
-	}
-
 	@Override
-	public void taOutUpdate(String stp){
-		//new command listener implementation
-		taOut.append(stp+"\n");
-		taOut.append(cmdList.handleCommand(stp)+"\n");// handleCommand returns command's string
-		taOut.setCaretPosition(taOut.getDocument().getLength());
-		taIn.setText("");
+	public void MoreCalls() {
+		
+//		for (;i < 25; i++) {
+//			if(i>=1){
+//				taOut.append("\n" + "Test " + (i + 1));
+//			}else{
+//				taOut.append("Test " + (i + 1));
+//			}
+//			vert.setValue(vert.getMaximum());
+//			taOut.setCaretPosition(taOut.getDocument().getLength());
+//		}
 	}
 }
