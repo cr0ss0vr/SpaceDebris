@@ -25,11 +25,10 @@ public class GameMain extends GameCore{
 		super.init();
 		
 		setObjects();
-
 	}
 	
 	private void loadImages(){
-
+		GE_Background = GameImage.loadImage("img/Background.jpg");
 	}
 	
 	private void loadSounds(){
@@ -224,6 +223,7 @@ public class GameMain extends GameCore{
 		//draw a black layer for heading text
 		gr.setColor(new Color(0,0,0));
 		gr.fillRect(0, 0, windWidth, windHeight);
+		gr.drawImage(GE_Background, 0, 0, windWidth, windHeight, 0, 0, window.getWidth(), window.getHeight(), null);
 	}
 	
 	public synchronized void overDraw(){//Last draw called, draws over everything

@@ -15,6 +15,7 @@ public abstract class GameCore {
 	protected int windHeight;
 	protected int windWidth;
 	protected int WindowOffset = 11;
+	protected Image GE_Background;
 	protected boolean debug = true;
 	protected boolean enterReleased = true, upReleased = true, downReleased = true, escapeReleased = true, sReleased = true;
 	protected static FontMetrics fm;
@@ -29,7 +30,6 @@ public abstract class GameCore {
 	static boolean customFont = false;
 		
 	public void init(){
-
 		
 		//set window
 		initWindow();
@@ -69,7 +69,7 @@ public abstract class GameCore {
 
 		window.setTitle("Space Debris"); // Add a window Title Caption
 		window.setSize(windWidth, windHeight); // Give the window a size
-		window.setResizable(false);
+		window.setResizable(true);
 
 		BufferedImage canvas = new BufferedImage(windWidth, windHeight,BufferedImage.TYPE_INT_ARGB);
 		gr = canvas.getGraphics();// Create a "handle" for the canvas which we can use for drawing.
