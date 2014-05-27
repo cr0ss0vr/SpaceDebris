@@ -23,9 +23,11 @@ public class CommandListener {
 		}else{
 			//cannot be a switch case, it wont recognise .startsWith, which means commands couldnt take arguments.
 			if(stp.toLowerCase().startsWith("help") || stp.toLowerCase().startsWith("?")){
-					return "Command list:\n"
-							+ "tEnable - Toggles command recognition."
-							+ "say - Says something from the server.";
+					return "  Command list:\n \n"
+							+ "    tEnable - Toggles command recognition. \n"
+							+ "    say - Says something from the server. \n"
+							+ "    clear - clears the screen. \n"
+							+ "    exit - shuts down the server correctly. \n \n";
 			}else if(stp.toLowerCase().startsWith("say ")){
 				String s2 = stp.substring(stp.indexOf(" ")).trim();
 				return "Server: "+ s2;

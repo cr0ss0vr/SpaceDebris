@@ -171,7 +171,7 @@ public abstract class ServerCore extends JFrame {
 			taOut.append("Quitting!");
 		}else if(stp.toLowerCase().startsWith("clear") || stp.toLowerCase().startsWith("cls")){
 			taOut.setText("");
-			taOut.append("Screen Cleared.");
+			taOut.append("Screen Cleared. /n");
 		}else{
 			taOut.append(cmdList.handleCommand(stp)+"\n");// handleCommand returns command's string
 		}
