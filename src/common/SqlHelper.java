@@ -1,4 +1,4 @@
-//
+//beanfarmer
 package common;
 
 import java.sql.Connection;
@@ -8,8 +8,11 @@ import java.sql.Statement;
 
 public class SqlHelper {
 
+private Connection c;
+private Statement stmt;
+
 	public void connectDb(String name){
-		Connection c = null;
+		c = null;
 	    try {
 	      Class.forName("org.sqlite.JDBC");
 	      c = DriverManager.getConnection("jdbc:sqlite:"+name+".db");
@@ -21,14 +24,14 @@ public class SqlHelper {
 	  }
 	
 	public void createTable(String nameDb, String tableName, String values){
-		Connection c = null;
-		Statement stmt = null;
+		c = null;
+		stmt = null;
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:"+nameDb+".db");
 			stmt = c.createStatement();
 			
-			String sql = "CREATE TABLE "+ tableName+ " " + values.toUpperCase();
+			String sql = "CREATE TABLE "+ tableName.toUpperCase() + " " + values.toUpperCase();
 			
 			stmt.executeUpdate(sql);
 			stmt.close();
@@ -40,8 +43,8 @@ public class SqlHelper {
 	}
 	
 	public void insert(String nameDb, String tableName, String values){
-		Connection c = null;
-	    Statement stmt = null;
+	    c = null;
+	    stmt = null;
 	    try {
 	      Class.forName("org.sqlite.JDBC");
 	      c = DriverManager.getConnection("jdbc:sqlite:"+nameDb+".db");
@@ -50,7 +53,7 @@ public class SqlHelper {
 
 	      stmt = c.createStatement();
 	      
-	      String sql = "INSERT INTO " + tableName +
+	      String sql = "INSERT INTO " + tableName.toUpperCase() +
 	                   values.toUpperCase(); 
 	      stmt.executeUpdate(sql);
 	      
