@@ -68,7 +68,7 @@ private Statement stmt;
 	  }
 	
 	
-	public ResultSet select(String nameDb, String tableName){
+	public ResultSet select(String nameDb, String selection, String tableName){
 		 	c = null;
 		 	stmt = null;
 		 	ResultSet temp = null;
@@ -79,7 +79,7 @@ private Statement stmt;
 		      System.out.println("Opened database successfully");
 
 		      stmt = c.createStatement();
-		      temp = stmt.executeQuery( "SELECT * FROM "+tableName.toUpperCase()+";" );
+		      temp = stmt.executeQuery( "SELECT "+selection.toUpperCase()+" FROM "+tableName.toUpperCase()+";" );
 		      stmt.close();
 		      c.close();
 		    } catch ( Exception e ) {
