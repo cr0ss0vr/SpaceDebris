@@ -162,7 +162,7 @@ public abstract class ServerCore extends JFrame {
 		 */ 
 		String txtIn = taIn.getText();
 		SqlHelper sqlhelper = new SqlHelper();
-		sqlhelper.insert("inputLog", "server (HISTORY) ","'"+ taIn.getText()+"'");
+		sqlhelper.insert("Server", "INPUTLOG (HISTORY) ","'"+ taIn.getText()+"'");
 		taOutUpdate(txtIn);
 	}
 	

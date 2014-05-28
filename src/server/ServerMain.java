@@ -16,14 +16,14 @@ public class ServerMain extends ServerCore{
 	private static SqlHelper sqlhelper = new SqlHelper();
 	
 	public static void main(String[] args){
-		sqlhelper.connectDb("inputLog");
+		sqlhelper.connectDb("Server");
 		new ServerMain().run();		
 	}
 
 	@Override
 	public void MoreCalls() {
 		if(isFirstRun){
-			sqlhelper.createTable("inputLog", "server", "(ID INTEGER PRIMARY KEY     AUTOINCREMENT," + 
+			sqlhelper.createTable("Server", "INPUTLOG", "(ID INTEGER PRIMARY KEY     AUTOINCREMENT," + 
 							  	  " HISTORY           TEXT    NOT NULL");
 			isFirstRun = false;
 		}
