@@ -58,8 +58,8 @@ private Statement stmt;
 
 	      stmt = c.createStatement();
 	      
-	      String sql = "INSERT INTO " + tableName.toUpperCase() + " "+
-	                   values.toUpperCase() + ";"; 
+	      String sql = "INSERT INTO " + tableName.toUpperCase() + " VALUES("+
+	                   values.toUpperCase() + ");"; 
 	      stmt.executeUpdate(sql);
 	      
 	      stmt.close();
@@ -73,7 +73,7 @@ private Statement stmt;
 	  }
 	
 	
-	public ResultSet select(String nameDb, String selection, String tableName){
+	public ResultSet select(String nameDb, String tableName, String selection){
 		 	c = null;
 		 	stmt = null;
 		 	ResultSet temp = null;
