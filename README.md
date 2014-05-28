@@ -1,9 +1,6 @@
 mp-game-1
 =========
 
-mp-game-1
-=========
-
 Client To-Do list:  
 >-Create basic UI - NO TEXT BOXES. ALL drawString!  
 >-Connect client and server.  
