@@ -17,7 +17,7 @@ public class ServerMain extends ServerCore{
 	public static void main(String[] args){
 		sqlhelper.connectDb("inputLog");
 		new ServerMain().run();
-		sqlhelper.createTable("inputLog", "server", "(ID INT PRIMARY KEY	NOT NULL,+"+"HISTORY	TEXT	NOT NULL"+")");
+		sqlhelper.createTable("inputLog", "server", "(ID INT PRIMARY KEY	NOT NULL,+"+" HISTORY	TEXT	NOT NULL"+")");
 		sqlhelper.insert("inputLog", "server", "1, 'hello world!'");
 		ResultSet res = sqlhelper.select("inputLog","server", "*");
 		

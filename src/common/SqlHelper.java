@@ -21,11 +21,12 @@ private Statement stmt;
 	    try {
 	      Class.forName("org.sqlite.JDBC");
 	      c = DriverManager.getConnection("jdbc:sqlite:"+name+".db");
+	      c.close();
 	    } catch ( Exception e ) {
 	      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	      System.exit(0);
 	    }
-	    System.out.println("Opened database successfully");
+	    System.out.println("Created database successfully");
 	  }
 	
 	public void createTable(String nameDb, String tableName, String values){
