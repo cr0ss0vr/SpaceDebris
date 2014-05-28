@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
 import common.CommandListener;
+import common.SqlHelper;
 import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
@@ -160,6 +161,8 @@ public abstract class ServerCore extends JFrame {
 		 * "Admin: " + 
 		 */ 
 		String txtIn = taIn.getText();
+		SqlHelper sqlhelper = new SqlHelper();
+		sqlhelper.insert("inputLog", "server (HISTORY) ","'"+ taIn.getText()+"'");
 		taOutUpdate(txtIn);
 	}
 	

@@ -11,39 +11,23 @@ public class ServerMain extends ServerCore{
 	
 	
 	int i = 0;
+	boolean isFirstRun = true;
 	
 	private static SqlHelper sqlhelper = new SqlHelper();
 	
 	public static void main(String[] args){
 		sqlhelper.connectDb("inputLog");
-		new ServerMain().run();
-		sqlhelper.createTable("inputLog", "server", "(ID INT PRIMARY KEY	NOT NULL,+"+" HISTORY	TEXT	NOT NULL"+")");
-		sqlhelper.insert("inputLog", "server", "1, 'hello world!'");
-		ResultSet res = sqlhelper.select("inputLog","server", "*");
-		
-		try {
-			while(res.next()){
-				String result = res.getString("HISTORY");
-				System.out.println(result);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		new ServerMain().run();		
 	}
 
 	@Override
 	public void MoreCalls() {
-		
-//		for (;i < 25; i++) {
-//			if(i>=1){
-//				taOut.append("\n" + "Test " + (i + 1));
-//			}else{
-//				taOut.append("Test " + (i + 1));
-//			}
-//			vert.setValue(vert.getMaximum());
-//			taOut.setCaretPosition(taOut.getDocument().getLength());
-//		}
+		if(isFirstRun){
+			sqlhelper.createTable("inputLog", "server", "(ID INTEGER PRIMARY KEY     AUTOINCREMENT," + 
+							  	  " HISTORY           TEXT    NOT NULL");
+			isFirstRun = false;
+		}
+		/*
+		}*/
 	}
 }

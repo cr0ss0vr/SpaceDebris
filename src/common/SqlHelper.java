@@ -4,6 +4,7 @@ package common;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SqlHelper {
@@ -37,14 +38,20 @@ private Statement stmt;
 			c = DriverManager.getConnection("jdbc:sqlite:"+nameDb+".db");
 			stmt = c.createStatement();
 			
-			String sql = "CREATE TABLE "+ tableName.toUpperCase() + " " + values.toUpperCase() + ";";
+			String sql = "CREATE TABLE "+ tableName.toUpperCase() + " " + values + ");";
+			
+			//String warn = stmt.getWarnings().getMessage();
+			
+			//System.out.println(warn);
 			
 			stmt.executeUpdate(sql);
 			stmt.close();
+			
+			System.out.println(tableName + " added");
 			c.close();
 		} catch ( Exception e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-			System.exit(0);
+			//System.exit(0);
 		}
 	}
 	
@@ -60,7 +67,7 @@ private Statement stmt;
 	      stmt = c.createStatement();
 	      
 	      String sql = "INSERT INTO " + tableName.toUpperCase() + " VALUES("+
-	                   values.toUpperCase() + ");"; 
+	                   values + ");"; 
 	      stmt.executeUpdate(sql);
 	      
 	      stmt.close();
