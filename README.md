@@ -14,7 +14,7 @@ Common To-Do List:
 >-Sqlhelper add delete method.
 
 Common Updates:
->-Started work on SQLite helper class (beanfarmer 27/05/2014)
+>-Started work on SQLite helper class (beanfarmer 27/05/2014)                                                               
 >-Added Select method to Sqlhelper.java (beanfarmer 28/05/2014)
 
 Server Updates:  
