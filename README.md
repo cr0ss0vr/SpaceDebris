@@ -8,10 +8,11 @@ Client To-Do list:
 Server To-Do list:  
 >-set up connected clients  
 >-show server ip in UI  
->-show connected clients in UI  
+>-show connected clients in UI
+>-add history to taIn using the up key																																	  
 
 Common To-Do List:
->-Sqlhelper add delete method.
+>-Sqlhelper add delete and update methods.
 
 Common Updates:
 >-Started work on SQLite helper class (beanfarmer 27/05/2014)
@@ -24,4 +25,4 @@ Server Updates:
 >-Implemented BACKWARDS "quit" and "exit" commands (not graceful) - added (beanfarmer 25/05/2014)  
 >-Enter key not sending messages - fixed (Cr0ss0vr 24/05/2014)  
 >-Enter key sending message and two blank lines - fixed (beanfarmer 24/05/2014)  					
->-Testing SqlHelper - (beanfarmer 28/05/2014)
+>-Testing SqlHelper command history is now saved - (beanfarmer 28/05/2014)
