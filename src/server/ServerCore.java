@@ -115,7 +115,7 @@ public abstract class ServerCore extends JFrame {
 		
 		//variable initialization
 		cmdList = new CommandListener();
-		taOutUpdate("Commands Enabled. \n"
+		taOut.append("Commands Enabled. \n"
 				+ "CommandListener listening.\n");
 	}
 
