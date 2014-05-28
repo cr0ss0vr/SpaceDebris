@@ -25,4 +25,5 @@ Server Updates:
 >-Implemented BACKWARDS "quit" and "exit" commands (not graceful) - added (beanfarmer 25/05/2014)  
 >-Enter key not sending messages - fixed (Cr0ss0vr 24/05/2014)  
 >-Enter key sending message and two blank lines - fixed (beanfarmer 24/05/2014)  	                                  				
->-Testing SqlHelper command history is now saved - (beanfarmer 28/05/2014)                                                  >-Renamed server db - (beanfarmer 28/05/2014)
+>-Testing SqlHelper command history is now saved - (beanfarmer 28/05/2014)  
+>-Renamed server db - (beanfarmer 28/05/2014)
