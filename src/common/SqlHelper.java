@@ -87,19 +87,19 @@ private Statement stmt;
 		 	ResultSet temp = null;
 		    try {
 		      Class.forName("org.sqlite.JDBC");
-		      c = DriverManager.getConnection("jdbc:sqlite:test.db");
+		      c = DriverManager.getConnection("jdbc:sqlite:"+nameDb+".db");
 		      c.setAutoCommit(false);
 		      System.out.println("Opened database successfully");
 
 		      stmt = c.createStatement();
-		      temp = stmt.executeQuery( "SELECT "+selection.toUpperCase()+" FROM "+tableName.toUpperCase()+";" );
+		      temp = stmt.executeQuery( "SELECT " + selection + " FROM " + tableName + ";" );
 		      stmt.close();
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		      System.exit(0);
 		    }
-		    System.out.println("Operation done successfully");
+		    System.out.println("Select completed successfully");
 			return temp;
 	}
 	

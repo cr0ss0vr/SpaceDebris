@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
 import common.CommandListener;
+import common.Keyboard;
 import common.SqlHelper;
 import net.miginfocom.swing.MigLayout;
 
@@ -28,6 +31,9 @@ public abstract class ServerCore extends JFrame {
 	public JTextField taIn; //fixed this input enter error needed textfield not textArea
 	public boolean taOutChange = false;
 
+	private int currentID;
+	private SqlHelper sqlhelper = new SqlHelper();
+	
 	JFrame window;
 	Dimension windDim;
 	JScrollBar vert;
@@ -35,6 +41,7 @@ public abstract class ServerCore extends JFrame {
 	JButton btnSend;
 	String serverState = "init";
 	CommandListener cmdList;
+	Keyboard kbd;
 
 	public void run() {
 		try {
@@ -137,6 +144,21 @@ public abstract class ServerCore extends JFrame {
 			}
 		}
 	}
+	
+	protected int getAllHistory() throws SQLException{ //make me useful
+		ResultSet res = sqlhelper.select("Server", "INPUTLOG", "*");
+		
+		int rowCount = 0;
+		
+		while(res.next()){
+			System.out.println(res.getNString(currentID));
+			rowCount++;
+		//res.last();
+		//rowCount = res.getRow();
+			System.out.println(rowCount);
+		}
+		return rowCount;
+	}
 
 	static void print(String x){
 		System.out.println(x);
@@ -161,7 +183,6 @@ public abstract class ServerCore extends JFrame {
 		 * "Admin: " + 
 		 */ 
 		String txtIn = taIn.getText();
-		SqlHelper sqlhelper = new SqlHelper();
 		sqlhelper.insert("Server", "INPUTLOG (HISTORY) ","'"+ taIn.getText()+"'");
 		taOutUpdate(txtIn);
 	}
