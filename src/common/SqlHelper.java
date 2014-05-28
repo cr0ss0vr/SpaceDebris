@@ -31,7 +31,7 @@ private Statement stmt;
 			c = DriverManager.getConnection("jdbc:sqlite:"+nameDb+".db");
 			stmt = c.createStatement();
 			
-			String sql = "CREATE TABLE "+ tableName.toUpperCase() + " " + values.toUpperCase();
+			String sql = "CREATE TABLE "+ tableName.toUpperCase() + " " + values.toUpperCase() + ";";
 			
 			stmt.executeUpdate(sql);
 			stmt.close();
@@ -53,8 +53,8 @@ private Statement stmt;
 
 	      stmt = c.createStatement();
 	      
-	      String sql = "INSERT INTO " + tableName.toUpperCase() +
-	                   values.toUpperCase(); 
+	      String sql = "INSERT INTO " + tableName.toUpperCase() + " "+
+	                   values.toUpperCase() + ";"; 
 	      stmt.executeUpdate(sql);
 	      
 	      stmt.close();
@@ -67,7 +67,30 @@ private Statement stmt;
 	    System.out.println("Records created successfully");
 	  }
 	
-	//-- to do Select and delete
+	
+	public ResultSet select(String nameDb, String tableName){
+		 	c = null;
+		 	stmt = null;
+		 	ResultSet temp = null;
+		    try {
+		      Class.forName("org.sqlite.JDBC");
+		      c = DriverManager.getConnection("jdbc:sqlite:test.db");
+		      c.setAutoCommit(false);
+		      System.out.println("Opened database successfully");
+
+		      stmt = c.createStatement();
+		      temp = stmt.executeQuery( "SELECT * FROM "+tableName.toUpperCase()+";" );
+		      stmt.close();
+		      c.close();
+		    } catch ( Exception e ) {
+		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+		      System.exit(0);
+		    }
+		    System.out.println("Operation done successfully");
+			return temp;
+	}
+	
+	//-- delete
 	
 }
 
