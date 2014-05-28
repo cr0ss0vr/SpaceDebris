@@ -11,6 +11,11 @@ public class SqlHelper {
 private Connection c;
 private Statement stmt;
 
+	public SqlHelper(){
+		c = null;
+		stmt = null;
+	}
+
 	public void connectDb(String name){
 		c = null;
 	    try {
@@ -90,7 +95,8 @@ private Statement stmt;
 			return temp;
 	}
 	
-	//-- delete
+	//-- update and delete todo 
+	//-- damn git
 	
 }
 
