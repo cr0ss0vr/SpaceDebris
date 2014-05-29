@@ -19,11 +19,11 @@ Common Updates:
 >-Added Select method to Sqlhelper.java (beanfarmer 28/05/2014)
 
 Server Updates:  
+>-Server can now read in history from db (not yet used) - (beanfarmer 28/05/2014)  					
+>-Testing SqlHelper command history is now saved - (beanfarmer 28/05/2014)
 >-Implemented "help" command - added (cr0ss0vr 25/05/2014)  
 >-Implemented "say" command - added (cr0ss0vr 25/05/2014)  
 >-Implemented "tEnable" command - added (cr0ss0vr 25/05/2014)                         
 >-Implemented BACKWARDS "quit" and "exit" commands (not graceful) - added (beanfarmer 25/05/2014)  
 >-Enter key not sending messages - fixed (Cr0ss0vr 24/05/2014)  
->-Enter key sending message and two blank lines - fixed (beanfarmer 24/05/2014)  					
->-Testing SqlHelper command history is now saved - (beanfarmer 28/05/2014)
->-Server can now read in history from db (not yet used) - (beanfarmer 28/05/2014)
+>-Enter key sending message and two blank lines - fixed (beanfarmer 24/05/2014)

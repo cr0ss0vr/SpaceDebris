@@ -65,13 +65,15 @@ public abstract class ServerCore extends JFrame {
 	public void init() {
         logger.log(Level.INFO, "Initialising main variables.");
 		
-        
+
 		initWindow();	
 		
 		//variable initialization
 		cmdList = new CommandListener();
 		taOut.append("Commands Enabled. \n"
 				+ "CommandListener listening.\n");
+		
+		dbConnect();
 	}
 
 	public void initWindow() {
@@ -138,7 +140,7 @@ public abstract class ServerCore extends JFrame {
 		serverState = "running";
 		while(!serverState.equalsIgnoreCase("quitting")){
 			
-			//any other code			
+			//any other code
 			MoreCalls();
 
 			//draw and finish
