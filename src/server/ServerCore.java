@@ -161,6 +161,9 @@ public abstract class ServerCore extends JFrame {
 		
 		while(res.next()){
 			System.out.println(res.getNString(currentID));
+			if(res.getNString(currentID).toLowerCase() == "exit"){
+				res.close();
+			}
 			rowCount++;
 		//res.last();
 		//rowCount = res.getRow();
