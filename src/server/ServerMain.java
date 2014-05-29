@@ -1,6 +1,8 @@
 package server;
 
+import java.io.File;
 import java.sql.SQLException;
+
 import common.SqlHelper;
 
 @SuppressWarnings("serial")
@@ -21,7 +23,9 @@ public class ServerMain extends ServerCore{
 	}
 	
 	public void getHistory(){
-		if(isFirstRun){
+
+		File f = new File("Server.db");
+		if(!f.exists()){
 			sqlhelper.createTable("Server", "INPUTLOG", "(ID INTEGER PRIMARY KEY     AUTOINCREMENT," + 
 							  	  " HISTORY           TEXT    NOT NULL");
 			isFirstRun = false;
