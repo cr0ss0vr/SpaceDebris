@@ -203,6 +203,8 @@ public abstract class ServerCore extends JFrame {
 		}else{
 			if(stp.toLowerCase().startsWith("tenable")){
 				taOut.append(cmdList.handleCommand(stp)+"\n");// handleCommand returns command's string
+			}else{
+				taOut.append(cmdList.handleCommand("say "+stp)+"\n");// handleCommand returns command's string
 			}
 		}
 		taOut.setCaretPosition(taOut.getDocument().getLength());
