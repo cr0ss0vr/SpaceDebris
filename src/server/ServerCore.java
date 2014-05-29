@@ -202,14 +202,16 @@ public abstract class ServerCore extends JFrame {
 	public void taOutUpdate(String stp){
 		//new command listener implementation
 		taOut.append(stp+"\n");
-		if(stp.toLowerCase().startsWith("quit") || stp.toLowerCase().startsWith("exit")){
-			serverState="quitting";
-			taOut.append("Quitting!");
-		}else if(stp.toLowerCase().startsWith("clear") || stp.toLowerCase().startsWith("cls")){
-			taOut.setText("");
-			taOut.append("Screen Cleared. \n");
-		}else{
-			taOut.append(cmdList.handleCommand(stp)+"\n");// handleCommand returns command's string
+		if(!cmdList.isEnabled()){
+			if(stp.toLowerCase().startsWith("quit") || stp.toLowerCase().startsWith("exit")){
+				serverState="quitting";
+				taOut.append("Quitting!");
+			}else if(stp.toLowerCase().startsWith("clear") || stp.toLowerCase().startsWith("cls")){
+				taOut.setText("");
+				taOut.append("Screen Cleared. \n");
+			}else{
+				taOut.append(cmdList.handleCommand(stp)+"\n");// handleCommand returns command's string
+			}
 		}
 		taOut.setCaretPosition(taOut.getDocument().getLength());
 		taIn.setText("");
