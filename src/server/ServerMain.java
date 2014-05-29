@@ -1,9 +1,6 @@
 package server;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Logger;
-
 import common.SqlHelper;
 
 @SuppressWarnings("serial")
@@ -16,10 +13,13 @@ public class ServerMain extends ServerCore{
 	private static SqlHelper sqlhelper = new SqlHelper();
 	
 	public static void main(String[] args){
-		sqlhelper.connectDb("Server");
 		new ServerMain().run();		
 	}
 
+	public void dbConnect(){
+		sqlhelper.connectDb("Server");		
+	}
+	
 	@Override
 	public void MoreCalls() {
 		if(isFirstRun){

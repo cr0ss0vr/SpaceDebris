@@ -45,7 +45,6 @@ public abstract class ServerCore extends JFrame {
 
 	public void run() {
 		try {
-            logger.log(Level.INFO, "Initialising");
 			init();
 			serverState = "setup";
 			mainLoop();
@@ -62,8 +61,21 @@ public abstract class ServerCore extends JFrame {
 	private void save() {
 		
 	}
-
+	
 	public void init() {
+        logger.log(Level.INFO, "Initialising main variables.");
+		
+        
+		initWindow();	
+		
+		//variable initialization
+		cmdList = new CommandListener();
+		taOut.append("Commands Enabled. \n"
+				+ "CommandListener listening.\n");
+	}
+
+	public void initWindow() {
+        logger.log(Level.INFO, "Initialising window.");
 		double scale = 1;
 		//JFrame setup
 		window = new JFrame();
@@ -120,11 +132,6 @@ public abstract class ServerCore extends JFrame {
 		
 		//show window
 		window.setVisible(true);
-		
-		//variable initialization
-		cmdList = new CommandListener();
-		taOut.append("Commands Enabled. \n"
-				+ "CommandListener listening.\n");
 	}
 
 	public void mainLoop(){
@@ -208,4 +215,6 @@ public abstract class ServerCore extends JFrame {
 	}
 	
 	public abstract void MoreCalls();
+	
+	public abstract void dbConnect();
 }
