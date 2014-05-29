@@ -155,7 +155,7 @@ public abstract class ServerCore extends JFrame {
 	}
 	
 	protected int getAllHistory() throws SQLException{ //make me useful
-		ResultSet res = sqlhelper.select("Server", "INPUTLOG", "*");
+		ResultSet res = sqlhelper.select("server/Server", "INPUTLOG", "*");
 		
 		int rowCount = 0;
 		
@@ -195,7 +195,7 @@ public abstract class ServerCore extends JFrame {
 		 * "Admin: " + 
 		 */ 
 		String txtIn = taIn.getText();
-		sqlhelper.insert("Server", "INPUTLOG (HISTORY) ","'"+ txtIn +"'");
+		sqlhelper.insert("server/Server", "INPUTLOG (HISTORY) ","'"+ txtIn +"'");
 		taOutUpdate(txtIn);
 	}
 	

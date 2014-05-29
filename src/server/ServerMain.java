@@ -19,14 +19,14 @@ public class ServerMain extends ServerCore{
 	}
 
 	public void dbConnect(){
-		sqlhelper.connectDb("Server");		
+		sqlhelper.connectDb("server/Server");		
 	}
 	
 	public void getHistory(){
-
-		File f = new File("Server.db");
+		
+		File f = new File("server/Server.db");
 		if(!f.exists()){
-			sqlhelper.createTable("Server", "INPUTLOG", "(ID INTEGER PRIMARY KEY     AUTOINCREMENT," + 
+			sqlhelper.createTable("server/Server", "INPUTLOG", "(ID INTEGER PRIMARY KEY     AUTOINCREMENT," + 
 							  	  " HISTORY           TEXT    NOT NULL");
 			isFirstRun = false;
 		}
