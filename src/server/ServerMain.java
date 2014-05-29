@@ -20,8 +20,7 @@ public class ServerMain extends ServerCore{
 		sqlhelper.connectDb("Server");		
 	}
 	
-	@Override
-	public void MoreCalls() {
+	public void getHistory(){
 		if(isFirstRun){
 			sqlhelper.createTable("Server", "INPUTLOG", "(ID INTEGER PRIMARY KEY     AUTOINCREMENT," + 
 							  	  " HISTORY           TEXT    NOT NULL");
@@ -34,6 +33,11 @@ public class ServerMain extends ServerCore{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void MoreCalls() {
+		
 		/*
 		}*/
 	}

@@ -195,7 +195,7 @@ public abstract class ServerCore extends JFrame {
 		 * "Admin: " + 
 		 */ 
 		String txtIn = taIn.getText();
-		sqlhelper.insert("Server", "INPUTLOG (HISTORY) ","'"+ taIn.getText()+"'");
+		sqlhelper.insert("Server", "INPUTLOG (HISTORY) ","'"+ txtIn +"'");
 		taOutUpdate(txtIn);
 	}
 	
@@ -213,6 +213,7 @@ public abstract class ServerCore extends JFrame {
 		}
 		taOut.setCaretPosition(taOut.getDocument().getLength());
 		taIn.setText("");
+		getHistory();
 	}
 	
 	public void writeLog(){
@@ -220,6 +221,8 @@ public abstract class ServerCore extends JFrame {
 	}
 	
 	public abstract void MoreCalls();
-	
+
 	public abstract void dbConnect();
+	
+	public abstract void getHistory();
 }
