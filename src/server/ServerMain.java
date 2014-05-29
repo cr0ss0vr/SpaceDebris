@@ -30,7 +30,6 @@ public class ServerMain extends ServerCore{
 							  	  " HISTORY           TEXT    NOT NULL");
 			isFirstRun = false;
 		}
-		
 		try {
 			getAllHistory();
 		} catch (SQLException e) {

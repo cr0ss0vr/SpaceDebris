@@ -1,26 +1,14 @@
 package server;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+import java.util.logging.*;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
-import common.CommandListener;
-import common.Keyboard;
-import common.SqlHelper;
+import common.*;
 import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
@@ -202,7 +190,7 @@ public abstract class ServerCore extends JFrame {
 	public void taOutUpdate(String stp){
 		//new command listener implementation
 		taOut.append(stp+"\n");
-		if(!cmdList.isEnabled()){
+		if(cmdList.isEnabled()){
 			if(stp.toLowerCase().startsWith("quit") || stp.toLowerCase().startsWith("exit")){
 				serverState="quitting";
 				taOut.append("Quitting!");
@@ -210,6 +198,10 @@ public abstract class ServerCore extends JFrame {
 				taOut.setText("");
 				taOut.append("Screen Cleared. \n");
 			}else{
+				taOut.append(cmdList.handleCommand(stp)+"\n");// handleCommand returns command's string
+			}
+		}else{
+			if(stp.toLowerCase().startsWith("tenable")){
 				taOut.append(cmdList.handleCommand(stp)+"\n");// handleCommand returns command's string
 			}
 		}
