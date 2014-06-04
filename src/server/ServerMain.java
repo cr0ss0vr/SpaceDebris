@@ -1,17 +1,14 @@
 package server;
 
+import java.awt.event.KeyEvent;
 import java.io.File;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import common.SqlHelper;
 
 @SuppressWarnings("serial")
 public class ServerMain extends ServerCore{
-	
-	
-	int i = 0;
-	boolean isFirstRun = true;
-	
 	private static SqlHelper sqlhelper = new SqlHelper();
 	
 	public static void main(String[] args){
@@ -23,25 +20,51 @@ public class ServerMain extends ServerCore{
 	}
 	
 	public void getHistory(){
-		
+
 		File f = new File("server/Server.db");
 		if(!f.exists()){
 			sqlhelper.createTable("server/Server", "INPUTLOG", "(ID INTEGER PRIMARY KEY     AUTOINCREMENT," + 
 							  	  " HISTORY           TEXT    NOT NULL");
-			isFirstRun = false;
 		}
 		try {
 			getAllHistory();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			
 		}
 	}
+
 	
-	@Override
-	public void MoreCalls() {
+	public int getAllHistory() throws SQLException{ //make me useful
+		ResultSet res = sqlhelper.select("server/Server", "INPUTLOG", "*");
 		
-		/*
-		}*/
+		int rowCount = 0;
+		
+		while(res.next()){
+			print(res.getNString(currentID));
+			if(res.getNString(currentID).toLowerCase() == "exit"){
+				res.close();
+			}
+			rowCount++;
+		//res.last();
+		//rowCount = res.getRow();
+			print(rowCount);
+		}
+		return rowCount;
+	}
+
+	public void MoreCalls() {
+
+	}
+
+	public void controls() {
+		int i =0;
+		if(kbd.getKeyState(KeyEvent.VK_UP)){
+			taIn.setText((String) prevInput.get(i));
+		}else if(kbd.getKeyState(KeyEvent.VK_DOWN)){
+			
+		}
+		
 	}
 }
