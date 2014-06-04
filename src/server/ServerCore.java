@@ -3,6 +3,7 @@ package server;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.*;
 
 import javax.swing.*;
@@ -17,10 +18,11 @@ public abstract class ServerCore extends JFrame {
 	public static Logger logger = Logger.getLogger("SpaceDebris");
 	public JTextArea taOut;
 	public JTextField taIn; //fixed this input enter error needed textfield not textArea
-	public boolean taOutChange = false;
+	public boolean taOutChange;
+	public ArrayList prevInput;
 
-	private int currentID;
-	private SqlHelper sqlhelper = new SqlHelper();
+	protected int currentID;
+	private SqlHelper sqlhelper;
 	
 	JFrame window;
 	Dimension windDim;
@@ -53,7 +55,9 @@ public abstract class ServerCore extends JFrame {
 	public void init() {
         logger.log(Level.INFO, "Initialising main variables.");
 		
-
+        taOutChange = false;
+        sqlhelper = new SqlHelper();
+        prevInput = new ArrayList();
 		initWindow();	
 		
 		//variable initialization
@@ -142,24 +146,6 @@ public abstract class ServerCore extends JFrame {
 		}
 	}
 	
-	protected int getAllHistory() throws SQLException{ //make me useful
-		ResultSet res = sqlhelper.select("server/Server", "INPUTLOG", "*");
-		
-		int rowCount = 0;
-		
-		while(res.next()){
-			System.out.println(res.getNString(currentID));
-			if(res.getNString(currentID).toLowerCase() == "exit"){
-				res.close();
-			}
-			rowCount++;
-		//res.last();
-		//rowCount = res.getRow();
-			System.out.println(rowCount);
-		}
-		return rowCount;
-	}
-
 	static void print(String x){
 		System.out.println(x);
 	}
@@ -215,10 +201,13 @@ public abstract class ServerCore extends JFrame {
 	public void writeLog(){
 		
 	}
+	public abstract void controls();
 	
 	public abstract void MoreCalls();
 
 	public abstract void dbConnect();
-	
+
 	public abstract void getHistory();
+	
+	public abstract int getAllHistory() throws SQLException;
 }

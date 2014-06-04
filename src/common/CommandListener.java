@@ -13,14 +13,18 @@ public class CommandListener {
 	}
 
 	public String handleCommand(String stp) {
-		if(!enabled){
-			if(stp.toLowerCase().startsWith("tenable")){
+		
+		if(stp.toLowerCase().startsWith("tenable")){
+			if(enabled){
+				enabled = false;
+				return "Commands Disabled.";
+			}else{
 				enabled = true;
 				return "Commands Enabled.";
-			}else{
-				return "Commands Disabled.";
 			}
-		}else{
+		}
+		
+		if(enabled){
 			//cannot be a switch case, it wont recognise .startsWith, which means commands couldnt take arguments.
 			if(stp.toLowerCase().startsWith("help") || stp.toLowerCase().startsWith("?")){
 					return "  Command list:\n \n"
@@ -31,12 +35,11 @@ public class CommandListener {
 			}else if(stp.toLowerCase().startsWith("say ")){
 				String s2 = stp.substring(stp.indexOf(" ")).trim();
 				return "Server: "+ s2;
-			}else if(stp.toLowerCase().startsWith("tenable")){
-				enabled=false;
-				return "Commands Disabled.";
 			}else{
 				return "No such command.";
 			}
+		}else{
+			return "Commands disabled.";
 		}
 	}
 }
