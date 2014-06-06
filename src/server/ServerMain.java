@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import common.SqlHelper;
 
@@ -36,22 +37,14 @@ public class ServerMain extends ServerCore{
 	}
 
 	
-	public int getAllHistory() throws SQLException{ //make me useful
+	public ArrayList<String> getAllHistory() throws SQLException{ // can now be accessed from an Arraylist!
 		ResultSet res = sqlhelper.select("server/Server", "INPUTLOG", "*");
-		
-		int rowCount = 0;
-		
+		ArrayList<String> hist = new ArrayList<String>();	
 		while(res.next()){
 			print(res.getNString(currentID));
-			if(res.getNString(currentID).toLowerCase() == "exit"){
-				res.close();
-			}
-			rowCount++;
-		//res.last();
-		//rowCount = res.getRow();
-			print(rowCount);
+			hist.add(res.getNString(currentID));
 		}
-		return rowCount;
+		return hist; //superuseful now!
 	}
 
 	public void MoreCalls() {

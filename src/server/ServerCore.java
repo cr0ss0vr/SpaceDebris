@@ -209,5 +209,5 @@ public abstract class ServerCore extends JFrame {
 
 	public abstract void getHistory();
 	
-	public abstract int getAllHistory() throws SQLException;
+	public abstract ArrayList<String> getAllHistory() throws SQLException;
 }
