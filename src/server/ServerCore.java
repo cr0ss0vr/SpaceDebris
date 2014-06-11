@@ -33,6 +33,43 @@ public abstract class ServerCore extends JFrame {
 	CommandListener cmdList;
 	Keyboard kbd;
 
+	KeyListener upDownListener = new KeyListener(){
+
+		@Override
+		public void keyPressed(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			if(arg0.getKeyCode() == KeyEvent.VK_UP){
+				if(currentID < prevInput.size()){
+					currentID++;
+					taIn.setText(prevInput.get(currentID));
+				}
+			}
+			if(arg0.getKeyCode() == KeyEvent.VK_DOWN){
+				if(currentID > -1){
+					currentID--;
+					if(currentID == -1){
+						taIn.setText("");
+					}else{
+						taIn.setText(prevInput.get(currentID));
+					}
+				}
+			}
+		}
+
+		@Override
+		public void keyReleased(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	};
+	
 	public void run() {
 		try {
 			init();
@@ -104,6 +141,7 @@ public abstract class ServerCore extends JFrame {
 		taOut.setRequestFocusEnabled(true);
 		taIn.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		window.getContentPane().add(taIn, "cell 0 1, grow,aligny bottom");
+		taIn.addKeyListener(upDownListener);
 		
 		//send button setup
 		btnSend = new JButton("Send");
