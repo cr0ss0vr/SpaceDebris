@@ -19,9 +19,9 @@ public abstract class ServerCore extends JFrame {
 	public JTextArea taOut;
 	public JTextField taIn; //fixed this input enter error needed textfield not textArea
 	public boolean taOutChange;
-	public ArrayList prevInput;
+	public ArrayList<String> prevInput;
 
-	protected int currentID;
+	protected int currentID = -1;
 	private SqlHelper sqlhelper;
 	
 	JFrame window;
@@ -57,7 +57,7 @@ public abstract class ServerCore extends JFrame {
 		
         taOutChange = false;
         sqlhelper = new SqlHelper();
-        prevInput = new ArrayList();
+        prevInput = new ArrayList<String>();
 		initWindow();	
 		
 		//variable initialization
@@ -176,6 +176,7 @@ public abstract class ServerCore extends JFrame {
 	public void taOutUpdate(String stp){
 		//new command listener implementation
 		taOut.append(stp+"\n");
+		cmdList.getPrevInput(prevInput);
 		if(cmdList.isEnabled()){
 			if(stp.toLowerCase().startsWith("quit") || stp.toLowerCase().startsWith("exit")){
 				serverState="quitting";
@@ -201,6 +202,7 @@ public abstract class ServerCore extends JFrame {
 	public void writeLog(){
 		
 	}
+	
 	public abstract void controls();
 	
 	public abstract void MoreCalls();
@@ -209,5 +211,5 @@ public abstract class ServerCore extends JFrame {
 
 	public abstract void getHistory();
 	
-	public abstract ArrayList<String> getAllHistory() throws SQLException;
+	public abstract void getAllHistory() throws SQLException;
 }

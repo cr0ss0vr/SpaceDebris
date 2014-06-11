@@ -37,27 +37,24 @@ public class ServerMain extends ServerCore{
 	}
 
 	
-	public ArrayList<String> getAllHistory() throws SQLException{ // can now be accessed from an Arraylist!
-		ResultSet res = sqlhelper.select("server/Server", "INPUTLOG", "*");
-		ArrayList<String> hist = new ArrayList<String>();	
-		while(res.next()){
-			print(res.getNString(currentID));
-			hist.add(res.getNString(currentID));
-		}
-		return hist; //superuseful now!
-	}
-
+	public void getAllHistory() throws SQLException{ // can now be accessed from an Arraylist!
+		prevInput = new ArrayList<String>();
+		prevInput = sqlhelper.select("server/Server", "INPUTLOG", "*");
+	} // to reference data call prevInput.get(int index)
+	
 	public void MoreCalls() {
 
 	}
 
-	public void controls() {
-		int i =0;
-		if(kbd.getKeyState(KeyEvent.VK_UP)){
-			taIn.setText((String) prevInput.get(i));
-		}else if(kbd.getKeyState(KeyEvent.VK_DOWN)){
-			
-		}
+	@Override
+	public void controls() { // needs to be connected to the ui somehow
+		// TODO Auto-generated method stub
 		
+		if(kbd.getKeyState(KeyEvent.VK_UP)){
+			taIn.setText("up");
+		}
+		else if(kbd.getKeyState(KeyEvent.VK_DOWN)){
+			taIn.setText("down");
+		}
 	}
 }
