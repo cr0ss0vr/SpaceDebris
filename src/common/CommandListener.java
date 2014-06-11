@@ -43,7 +43,7 @@ public class CommandListener {
 			}else if(stp.toLowerCase().startsWith("say ")){
 				String s2 = stp.substring(stp.indexOf(" ")).trim();
 				return "Server: "+ s2;
-			}else if(stp.toLowerCase().startsWith("history ")){
+			}else if(stp.toLowerCase().startsWith("history")){
 				StringBuilder SB = new StringBuilder();
 				for(int i = 0; i < prevInput.size(); i++){
 					SB.append(prevInput.get(i) + " \n");
