@@ -78,7 +78,7 @@ private Statement stmt;
 	  }
 	
 	
-	public ArrayList<String> select(String nameDb, String tableName, String selection){
+	public ArrayList<String> select(String nameDb, String tableName, String selection, String order){
 		 	c = null;
 		 	stmt = null;
 		 	ArrayList<String> temp = new ArrayList<String>();
@@ -89,11 +89,12 @@ private Statement stmt;
 		      System.out.println("Opened database successfully");
 
 		      stmt = c.createStatement();
-		      ResultSet rs = stmt.executeQuery( "SELECT " + selection + " FROM " + tableName + ";" );
+		      ResultSet rs = stmt.executeQuery( "SELECT " + selection + " FROM " + tableName + " " +  order + ";" );
 		      while(rs.next()){
 		    	  String Hist = rs.getString("history");
 		    	  temp.add(Hist);
 		      }
+		      
 		      rs.close();
 		      stmt.close();
 		      c.close();
