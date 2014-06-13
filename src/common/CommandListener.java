@@ -38,7 +38,7 @@ public class CommandListener {
 							+ "    tEnable - Toggles command recognition. \n"
 							+ "    say - Says something from the server. \n"
 							+ "    clear - clears the screen. \n"
-							+ "	   history - gets the command history \n"
+							+ "    history - gets the command history \n"
 							+ "    exit - shuts down the server correctly. \n \n";
 			}else if(stp.toLowerCase().startsWith("say ")){
 				String s2 = stp.substring(stp.indexOf(" ")).trim();

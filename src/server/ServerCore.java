@@ -39,8 +39,11 @@ public abstract class ServerCore extends JFrame {
 		public void keyPressed(KeyEvent arg0) {
 			// TODO Auto-generated method stub
 			if(arg0.getKeyCode() == KeyEvent.VK_UP){
-				if(currentID < prevInput.size()){
+				if(currentID < (prevInput.size() -1)){
 					currentID++;
+					if(currentID > prevInput.size()){
+						currentID = 0;
+					}
 					taIn.setText(prevInput.get(currentID));
 				}
 			}
@@ -95,7 +98,8 @@ public abstract class ServerCore extends JFrame {
         taOutChange = false;
         sqlhelper = new SqlHelper();
         prevInput = new ArrayList<String>();
-		initWindow();	
+		initWindow();
+		getDbConnection();
 		
 		//variable initialization
 		cmdList = new CommandListener();
@@ -234,7 +238,7 @@ public abstract class ServerCore extends JFrame {
 		}
 		taOut.setCaretPosition(taOut.getDocument().getLength());
 		taIn.setText("");
-		getHistory();
+		getDbConnection();
 	}
 	
 	public void writeLog(){
@@ -247,7 +251,7 @@ public abstract class ServerCore extends JFrame {
 
 	public abstract void dbConnect();
 
-	public abstract void getHistory();
+	public abstract void getDbConnection();
 	
 	public abstract void getAllHistory() throws SQLException;
 }

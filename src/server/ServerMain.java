@@ -19,7 +19,7 @@ public class ServerMain extends ServerCore{
 		sqlhelper.connectDb("server/Server");		
 	}
 	
-	public void getHistory(){
+	public void getDbConnection(){
 
 		File f = new File("server/Server.db");
 		if(!f.exists()){
