@@ -9,7 +9,6 @@ Server To-Do list:
 >-set up connected clients  
 >-show server ip in UI  
 >-show connected clients in UI
->-add history to taIn using the up key																																	  
 
 Common To-Do List:
 >-Sqlhelper add delete and update methods.
@@ -19,6 +18,7 @@ Common Updates:
 >-Added Select method to Sqlhelper.java (beanfarmer 28/05/2014)
 
 Server Updates:  
+>-Up and Down Arrows now brings history in from ArrayList which is populated from sqlite db - added beanfarmer (13/06/2014)
 >-Server can now read in history from db (not yet used) - (beanfarmer 28/05/2014)  					
 >-Testing SqlHelper command history is now saved - (beanfarmer 28/05/2014)
 >-Implemented "help" command - added (cr0ss0vr 25/05/2014)  
