@@ -6,6 +6,7 @@
 package common;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class SqlHelper {
 
@@ -77,10 +78,12 @@ private Statement stmt;
 	  }
 	
 	
-	public ResultSet select(String nameDb, String tableName, String selection){
+	public ArrayList<String> select(String nameDb, String tableName, String selection, String order, String colName){
 		 	c = null;
 		 	stmt = null;
-		 	ResultSet temp = null;
+		 	ResultSet rs = null;
+		 	ArrayList<String> temp = new ArrayList<String>();
+		 	
 		    try{
 		      Class.forName("org.sqlite.JDBC");
 		      c = DriverManager.getConnection("jdbc:sqlite:"+nameDb+".db");
@@ -88,7 +91,13 @@ private Statement stmt;
 		      System.out.println("Opened database successfully");
 
 		      stmt = c.createStatement();
-		      temp = stmt.executeQuery( "SELECT " + selection + " FROM " + tableName + ";" );
+		      rs = stmt.executeQuery( "SELECT " + selection + " FROM " + tableName + " " + order +";" );
+		      
+		      while(rs.next()){
+		    	  String out = rs.getNString(colName);
+		    	  temp.add(out);
+		      }
+		      
 		      stmt.close();
 		      c.close();
 		    }catch ( Exception e ) {

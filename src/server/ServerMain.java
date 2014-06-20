@@ -38,7 +38,7 @@ public class ServerMain extends ServerCore{
 	
 	public void getAllHistory() throws SQLException{ // can now be accessed from an Arraylist!
 		prevInput = new ArrayList<String>();
-		prevInput = sqlhelper.select("server/Server", "INPUTLOG", "*", "ORDER BY ID DESC"); 
+		prevInput = sqlhelper.select("server/Server", "INPUTLOG", "*", "ORDER BY ID DESC", "history"); 
 	} // to reference data call prevInput.get(int index)
 	
 	public void MoreCalls() {
